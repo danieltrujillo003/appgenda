@@ -25,7 +25,8 @@ function ListAppointments({ navigation }) {
             <FlatList
                 data={appointments}
                 renderItem={({ item }) => <CardComponent
-                    appointment={item}/>}
+                    appointment={item}
+                    navigation={navigation}/>}
                 keyExtractor={item => item.id}
             >
             </FlatList>

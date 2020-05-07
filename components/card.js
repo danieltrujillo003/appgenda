@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableHighlight } from 'react-native';
 
-function CardComponent(props){
-    const {date, description, name, time} = props.appointment;
+function CardComponent({ navigation, appointment }){
+    const {date, description, name, time, id} = appointment
     return(
         <View style={styles.container}>
           <Text style={styles.title}>{date} at {time}</Text>
@@ -11,9 +11,11 @@ function CardComponent(props){
           <Text>Name: {name}</Text>
           <Text>Description: {description}</Text>
           <View style={styles.buttons}>
-            <Button title='View More' />
-            <Button title='Edit' />
-            <Button title='Delete' />
+            <Button title='View More' onPress={() => navigation.navigate('Edit', {id})}/>
+            <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {id})}>
+              <Text>EDIT</Text>
+            </TouchableHighlight>
+            <Button title='Delete' onPress={() => navigation.navigate('Edit', {id})}/>
           </View>
         </View>
     );
