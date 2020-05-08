@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: 'black',
         borderRadius: 10,
-        borderWidth: 2,
+        berderWidth: 2,
         marginBottom: 20
     },
     title: {

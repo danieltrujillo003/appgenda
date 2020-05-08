@@ -9,7 +9,7 @@ function CardComponent({ navigation, appointment }){
           <Text>Name: {name}</Text>
           <Text>Description: {description}</Text>
           <View style={styles.buttons}>
-            <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {appointment, id: _id || id})}>
+            <TouchableHighlight style={''} onPress={() => navigation.navigate('Details', {appointment})}>
               <Text>VIEW MORE</Text>
             </TouchableHighlight>
             <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {appointment, id: _id || id})}>
