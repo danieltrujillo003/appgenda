@@ -9,7 +9,7 @@ function DetailstAppointments({ navigation }) {
     
     /* Data for the flatlist */
     const fetchAppointments = async () =>{
-        let response = await fetch('http://localhost/appgenda-api-slim/api/appointments');
+        let response = await fetch('http://localhost/appgenda-api-slim/api/appointment/');
         let jsonResponse = await response.json();
         setAppointments(jsonResponse);
     }
