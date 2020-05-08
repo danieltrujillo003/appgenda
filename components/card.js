@@ -1,5 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableHighlight, Alert } from 'react-native';
+
+function deleteAlert (name) {
+  Alert.alert(
+    'Delete Appointment',
+    `Are you sure you want to delete the appointment with ${name}?`,
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "YES",
+        onPress: async () => {
+          try {
+            await fetch(`http://localhost/appgenda-api-slim/api/appointment/update/${id}`, { method: 'DELETE' })
+          } catch (error) {
+            console.error('Error:', error)
+          }
+          navigation.navigate('Home')
+        }
+      }
+    ],
+    { cancelable: false }
+  )
+}
 
 function CardComponent({ navigation, appointment }){
     const {date, description, name, time, id, _id} = appointment
@@ -15,7 +40,7 @@ function CardComponent({ navigation, appointment }){
             <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {appointment, id: _id || id})}>
               <Text>EDIT</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {appointment, id: _id || id})}>
+            <TouchableHighlight style={''} onPress={() => deleteAlert(name)}>
               <Text>DELETE</Text>
             </TouchableHighlight>
           </View>
