@@ -1,46 +1,20 @@
-import React, {useEffect, useState, Component} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import Validator from '../components/validator'
 
 function EditAppointments({ route, navigation }) {
-    const isFocused = useIsFocused();
-    const { id } = route.params;
-    const [appointment, setAppointment] = useState([]);
-    const [date, setDate] = useState(null);
-    const [time, setTime] = useState(null);
-    const [description, setDescription] = useState(null);
-    const [name, setName] = useState(null);
-    const [lastname, setLastname] = useState(null);
-    const [clientid, setClientId] = useState(null);
-    const [birthdate, setBirthdate] = useState(null);
-    const [city, setCity] = useState(null);
-    const [neighborhood, setNeighborhood] = useState(null);
-    const [address, setAddress] = useState(null);
-    const [phonenumber, setPhonenumber] = useState(null);
-
-    const fetchAppointment = async () => {
-        let response = await fetch(`http://localhost/appgenda-api-slim/api/appointment/${id}`);
-        let jsonResponse = await response.json();
-        setAppointment(jsonResponse);
-    }
-
-    useEffect(()=>{
-        fetchAppointment();
-    },[isFocused]);
-
-    useEffect(()=>{
-        setDate(appointment.date);
-        setTime(appointment.time);
-        setDescription(appointment.description);
-        setName(appointment.name);
-        setLastname(appointment.lastname);
-        setClientId(appointment.clientid);
-        setBirthdate(appointment.birthdate);
-        setCity(appointment.city);
-        setNeighborhood(appointment.neighborhood);
-        setAddress(appointment.address);
-        setPhonenumber(appointment.phonenumber);
-    },[appointment]);
+    const { id, appointment } = route.params;
+    const [date, setDate] = useState(appointment.date);
+    const [time, setTime] = useState(appointment.time);
+    const [description, setDescription] = useState(appointment.description);
+    const [name, setName] = useState(appointment.name);
+    const [lastname, setLastname] = useState(appointment.lastname);
+    const [clientid, setClientid] = useState(appointment.clientid);
+    const [birthdate, setBirthdate] = useState(appointment.birthdate);
+    const [city, setCity] = useState(appointment.city);
+    const [neighborhood, setNeighborhood] = useState(appointment.neighborhood);
+    const [address, setAddress] = useState(appointment.address);
+    const [phonenumber, setPhonenumber] = useState(appointment.phonenumber);
 
     const updateData = async () => {
         let response
@@ -61,20 +35,20 @@ function EditAppointments({ route, navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Prsonal data:</Text>
-            <TextInput style={styles.input} value= {date} onChangeText={text=> setDate(text)}/>
-            <TextInput style={styles.input} value= {time} onChangeText={text => setTime(text)}/>
-            <TextInput style={styles.input} value= {description} onChangeText={text => setDescription(text)}/>
+            <Text style={styles.title}>Personal data:</Text>
+            <Validator type='temp' currentValue={date} handler={setDate}/>
+            <Validator type='temp' currentValue={time} handler={setTime}/>
+            <Validator type='temp' currentValue={description} handler={setDescription}/>
 
             <Text style={styles.title}>Client data:</Text>
-            <TextInput style={styles.input} value= {name} onChangeText={text=> setName(text)}/>
-            <TextInput style={styles.input} value= {lastname} onChangeText={text => setLastname(text)}/>
-            <TextInput style={styles.input} value= {clientid} onChangeText={text => setClientid(text)}/>
-            <TextInput style={styles.input} value= {birthdate} onChangeText={text=> setBirthdate(text)}/>
-            <TextInput style={styles.input} value= {city} onChangeText={text => setCity(text)}/>
-            <TextInput style={styles.input} value= {neighborhood} onChangeText={text => setNeighborhood(text)}/>
-            <TextInput style={styles.input} value= {address} onChangeText={text=> setAddress(text)}/>
-            <TextInput style={styles.input} value= {phonenumber} onChangeText={text => setPhonenumber(text)}/>
+            <Validator type='temp' currentValue={name} handler={setName}/>
+            <Validator type='temp' currentValue={lastname} handler={setLastname}/>
+            <Validator type='temp' currentValue={clientid} handler={setClientid}/>
+            <Validator type='temp' currentValue={birthdate} handler={setBirthdate}/>
+            <Validator type='temp' currentValue={city} handler={setCity}/>
+            <Validator type='temp' currentValue={neighborhood} handler={setNeighborhood}/>
+            <Validator type='temp' currentValue={address} handler={setAddress}/>
+            <Validator type='temp' currentValue={phonenumber} handler={setPhonenumber}/>
 
             <View style={styles.buttons}>
                 <TouchableHighlight style={''} onPress={updateData}>

@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, TextInput } from 'react-native';
 
 function Validator(props){
-  const { type } = props
-  const [value, onChangeText] = useState('');
+  const { type, currentValue, handler } = props
+  const [value, onChangeText] = useState(currentValue);
 
   useEffect(()=>{
         setIsRight(inputType[type].test);
@@ -26,7 +26,11 @@ function Validator(props){
     // city,
     // neighborhood,
     // address,
-    // phonenumber
+    // phonenumber,
+    temp: {
+      test: /.*/.test(value),
+      message: 'lalala'
+    }
   }
 
   const [isRight, setIsRight] = useState(inputType[type].test);
@@ -35,7 +39,7 @@ function Validator(props){
     <>
     <TextInput
       style={[styles.container,isRight ? styles.rightInput : styles.wrongInput]}
-      onChangeText={text => onChangeText(text)}
+      onChangeText={text => {handler(text),onChangeText(text)}}
       value={value}
     />
     {
@@ -52,10 +56,7 @@ const styles = StyleSheet.create({
       borderWidth: 1
     },
     rightInput: {
-      borderColor:'green',
-      '&:focus': {
-        borderColor:'blue'
-      }
+      borderColor:'green'
     },
     wrongInput: {
       borderColor:'red'
