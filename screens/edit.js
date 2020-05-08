@@ -36,19 +36,19 @@ function EditAppointments({ route, navigation }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Personal data:</Text>
-            <Validator type='temp' currentValue={date} handler={setDate}/>
-            <Validator type='temp' currentValue={time} handler={setTime}/>
-            <Validator type='temp' currentValue={description} handler={setDescription}/>
+            <Validator type='date' currentValue={date} handler={setDate}/>
+            <Validator type='time' currentValue={time} handler={setTime}/>
+            <Validator type='description' currentValue={description} handler={setDescription}/>
 
             <Text style={styles.title}>Client data:</Text>
-            <Validator type='temp' currentValue={name} handler={setName}/>
-            <Validator type='temp' currentValue={lastname} handler={setLastname}/>
-            <Validator type='temp' currentValue={clientid} handler={setClientid}/>
-            <Validator type='temp' currentValue={birthdate} handler={setBirthdate}/>
-            <Validator type='temp' currentValue={city} handler={setCity}/>
-            <Validator type='temp' currentValue={neighborhood} handler={setNeighborhood}/>
-            <Validator type='temp' currentValue={address} handler={setAddress}/>
-            <Validator type='temp' currentValue={phonenumber} handler={setPhonenumber}/>
+            <Validator type='name' currentValue={name} handler={setName}/>
+            <Validator type='lastname' currentValue={lastname} handler={setLastname}/>
+            <Validator type='clientid' currentValue={clientid} handler={setClientid}/>
+            <Validator type='birthdate' currentValue={birthdate} handler={setBirthdate}/>
+            <Validator type='city' currentValue={city} handler={setCity}/>
+            <Validator type='neighborhood' currentValue={neighborhood} handler={setNeighborhood}/>
+            <Validator type='address' currentValue={address} handler={setAddress}/>
+            <Validator type='phonenumber' currentValue={phonenumber} handler={setPhonenumber}/>
 
             <View style={styles.buttons}>
                 <TouchableHighlight style={''} onPress={updateData}>
