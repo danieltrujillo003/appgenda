@@ -1,49 +1,63 @@
-import React, {useEffect, useState, Component} from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { TouchableHighlight,  FlatList} from 'react-native-gesture-handler';
-import { useIsFocused } from '@react-navigation/native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import Validator from '../components/validator'
 
-function EditAppointments({ navigation }) {
-    const isFocused = useIsFocused();
-    const [appointments, setAppointments, value, onChangeText] = useState([]);
-    /* Data for the flatlist */
-    const fetchAppointments = async () =>{
-        let response = await fetch('http://localhost/appgenda-api-slim/api/appointments');
-        let jsonResponse = await response.json();
-        setAppointments(jsonResponse);
+function EditAppointments({ route, navigation }) {
+    const { id, appointment } = route.params;
+    const [date, setDate] = useState(appointment.date);
+    const [time, setTime] = useState(appointment.time);
+    const [description, setDescription] = useState(appointment.description);
+    const [name, setName] = useState(appointment.name);
+    const [lastname, setLastname] = useState(appointment.lastname);
+    const [clientid, setClientid] = useState(appointment.clientid);
+    const [birthdate, setBirthdate] = useState(appointment.birthdate);
+    const [city, setCity] = useState(appointment.city);
+    const [neighborhood, setNeighborhood] = useState(appointment.neighborhood);
+    const [address, setAddress] = useState(appointment.address);
+    const [phonenumber, setPhonenumber] = useState(appointment.phonenumber);
+
+    const updateData = async () => {
+        let response
+        try {
+            response = await fetch(`http://localhost/appgenda-api-slim/api/appointment/update/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({date,time,description,name,lastname,clientid,birthdate,city,neighborhood,address,phonenumber}),
+            })
+        } catch (error) {
+            console.error('Error:', error)
+        }
+        navigation.navigate('List')
+
     }
-    useEffect(()=>{
-        fetchAppointments();
-    },[isFocused]);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Datos personales:</Text>
-            <TextInput style={styles.input} value= {""} onChangeText={text=> onChangeText(text)}/> 
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            
-            <Text style={styles.title}>Datos del cliente:</Text>
-            <TextInput style={styles.input} value= {""} onChangeText={text=> onChangeText(text)}/> 
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            <TextInput style={styles.input} value= {""} onChangeText={text=> onChangeText(text)}/> 
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            <TextInput style={styles.input} value= {""} onChangeText={text=> onChangeText(text)}/> 
-            <TextInput style={styles.input} value= {""} onChangeText={text => onChangeText(text)}/>
-            
+            <Text style={styles.title}>Personal data:</Text>
+            <Validator type='temp' currentValue={date} handler={setDate}/>
+            <Validator type='temp' currentValue={time} handler={setTime}/>
+            <Validator type='temp' currentValue={description} handler={setDescription}/>
+
+            <Text style={styles.title}>Client data:</Text>
+            <Validator type='temp' currentValue={name} handler={setName}/>
+            <Validator type='temp' currentValue={lastname} handler={setLastname}/>
+            <Validator type='temp' currentValue={clientid} handler={setClientid}/>
+            <Validator type='temp' currentValue={birthdate} handler={setBirthdate}/>
+            <Validator type='temp' currentValue={city} handler={setCity}/>
+            <Validator type='temp' currentValue={neighborhood} handler={setNeighborhood}/>
+            <Validator type='temp' currentValue={address} handler={setAddress}/>
+            <Validator type='temp' currentValue={phonenumber} handler={setPhonenumber}/>
+
             <View style={styles.buttons}>
-                <Button title='Save' />
-                <Button title='Cancel' />
+                <TouchableHighlight style={''} onPress={updateData}>
+                    <Text>SAVE</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={''} onPress={() => navigation.navigate('List')}>
+                    <Text>CANCEL</Text>
+                </TouchableHighlight>
             </View>
-
-            <FlatList
-                data={appointments}
-                renderItem={({ item }) => <CardComponent appointment={item}/>}
-                keyExtractor={item => item.id}>
-            </FlatList>   
-
         </View>
     );
 }

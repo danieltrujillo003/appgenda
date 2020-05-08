@@ -27,7 +27,8 @@ function ListAppointments({ navigation }) {
             <FlatList
                 data={appointments}
                 renderItem={({ item }) => <CardComponent
-                    appointment={item}/>}
+                    appointment={item}
+                    navigation={navigation}/>}
                 keyExtractor={item => item.id}
             >
             </FlatList>
@@ -38,7 +39,7 @@ function ListAppointments({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column'
+        alignItems: 'center'
     },
     createAppointmentButton: {
         backgroundColor: 'purple',

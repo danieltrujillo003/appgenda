@@ -13,11 +13,11 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-       {/* <Stack.Screen name="Home" component={Home} /> */}
-        {/* <Stack.Screen name="List" component={List} /> */}
-       {/* <Stack.Screen name="Create" component={Create} /> */}
-        <Stack.Screen name="Details" component={Details} />
-        {/* <Stack.Screen name="Edit" component={Edit} />  */}
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="List" component={List} />
+        {/* <Stack.Screen name="Create" component={Create} /> */}
+        {/* <Stack.Screen name="Details" component={Details} /> */}
+        <Stack.Screen name="Edit" component={Edit} />
       </Stack.Navigator>
     </NavigationContainer>
   );
