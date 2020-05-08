@@ -6,6 +6,8 @@ import Home from './screens/home'
 import List from './screens/list'
 import Edit from './screens/edit'
 import Details from'./screens/details'
+import Create from'./screens/create'
+
 
 const Stack = createStackNavigator();
 
@@ -15,7 +17,7 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="List" component={List} />
-        {/* <Stack.Screen name="Create" component={Create} /> */}
+        <Stack.Screen name="Create" component={Create} />
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="Edit" component={Edit} />
       </Stack.Navigator>

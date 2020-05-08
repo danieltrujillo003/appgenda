@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Validator from '../components/validator'
 
 function EditAppointments({ route, navigation }) {
@@ -19,7 +19,7 @@ function EditAppointments({ route, navigation }) {
     const updateData = async () => {
         let response
         try {
-            response = await fetch(`http://localhost/appgenda-api-slim/api/appointment/update/${id}`, {
+            response = await fetch(`http://localhost:3000/appointment/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: 'black',
         borderRadius: 10,
-        berderWidth: 2,
+        borderWidth: 2,
         marginBottom: 20
     },
     title: {
