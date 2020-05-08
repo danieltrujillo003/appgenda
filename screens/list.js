@@ -9,7 +9,7 @@ function ListAppointments({ navigation }) {
     const [appointments, setAppointments] = useState([]);
 
     const fetchAppointments = async () =>{
-        let response = await fetch('http://localhost/appgenda-api-slim/api/appointments');
+        let response = await fetch('http://localhost/projects/api/appgenda-api-slim/api/appointments');
         let jsonResponse = await response.json();
         setAppointments(jsonResponse);
     }
@@ -23,6 +23,7 @@ function ListAppointments({ navigation }) {
                 <Text style={styles.buttonTextStyle}>Create Appointment</Text>
             </TouchableHighlight>
             <FlatList
+                style={styles.list}
                 data={appointments}
                 renderItem={({ item }) => <CardComponent
                     appointment={item}
@@ -37,12 +38,29 @@ function ListAppointments({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: 20
     },
     createAppointmentButton: {
-        backgroundColor: 'purple',
-        padding: 20,
+        backgroundColor: 'teal',
+        paddingBottom: 10,
+        paddingTop: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        borderRadius: 10,
         alignItems: 'center',
+        alignSelf: 'left',
+        width: 300,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     buttonTextStyle: {
         color: 'white'
@@ -56,6 +74,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
     },
+    list: {
+        alignSelf: 'stretch'
+    }
 });
 
 export default ListAppointments;
