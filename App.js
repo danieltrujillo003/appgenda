@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/home'
 import List from './screens/list'
 import Edit from './screens/edit'
-
+import Details from'./screens/details'
 
 const Stack = createStackNavigator();
 
