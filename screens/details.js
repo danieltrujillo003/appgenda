@@ -4,17 +4,17 @@ import { useIsFocused } from '@react-navigation/native';
 
 function DetailstAppointments({ navigation }) {
     const isFocused = useIsFocused();
-    const [appointments, setAppointments] = useState([]);
-    const [date, description, name, time, lastname, clientid, birthdate, city, neighborhood, address, phonenumber] = useState([]);
-    
+    const [appointment, setAppointment] = useState([]);
+    // const [date, description, name, time, lastname, clientid, birthdate, city, neighborhood, address, phonenumber] = useState([]);
+    const {date, description, name, time, lastname, clientid, birthdate, city, neighborhood, address, phonenumber} = appointment;
     /* Data for the flatlist */
-    const fetchAppointments = async () =>{
-        let response = await fetch('http://localhost/appgenda-api-slim/api/appointment/');
+    const fetchAppointment = async () =>{
+        let response = await fetch(`https://localhost/appgenda-api/appgenda-api-slim/api/appointment/${id}`);
         let jsonResponse = await response.json();
-        setAppointments(jsonResponse);
+        setAppointment(jsonResponse);
     }
     useEffect(()=>{
-        fetchAppointments();
+        fetchAppointment();
     },[isFocused]);
 
     return (
