@@ -1,8 +1,0 @@
-{
-    "autoload": {
-        "php-4": {
-            "App\\": "app/"
-        }
-    },
-    "require": {}
-}
