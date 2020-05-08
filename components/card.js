@@ -14,7 +14,7 @@ function deleteAlert (name) {
       { text: "YES",
         onPress: async () => {
           try {
-            await fetch(`http://localhost/appgenda-api-slim/api/appointment/update/${id}`, { method: 'DELETE' })
+            await fetch(`http://localhost:3000/appointment/${id}`, { method: 'DELETE' })
           } catch (error) {
             console.error('Error:', error)
           }

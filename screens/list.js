@@ -9,7 +9,7 @@ function ListAppointments({ navigation }) {
     const [appointments, setAppointments] = useState([]);
 
     const fetchAppointments = async () =>{
-        let response = await fetch('http://localhost/appgenda-api-slim/api/appointments');
+        let response = await fetch('http://localhost:3000/appointment');
         let jsonResponse = await response.json();
         setAppointments(jsonResponse);
     }
