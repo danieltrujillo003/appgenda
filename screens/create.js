@@ -2,23 +2,23 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Validator from '../components/validator'
 
-function CreateAppointments({ route, navigation }) {
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    const [description, setDescription] = useState("");
-    const [name, setName] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [clientid, setClientid] = useState("");
-    const [birthdate, setBirthdate] = useState("");
-    const [city, setCity] = useState("");
-    const [neighborhood, setNeighborhood] = useState("");
-    const [address, setAddress] = useState("");
-    const [phonenumber, setPhonenumber] = useState("");
+function CreateAppointment({ route, navigation }) {
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [clientid, setClientid] = useState('');
+    const [birthdate, setBirthdate] = useState('');
+    const [city, setCity] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [address, setAddress] = useState('');
+    const [phonenumber, setPhonenumber] = useState('');
 
     const createData = async () => {
         let response
         try {
-            response = await fetch(`http://localhost:3000/appointment/${id}`, {
+            response = await fetch(`http://localhost/appgenda-api-slim/api/appointment/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,19 +35,19 @@ function CreateAppointments({ route, navigation }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Personal data:</Text>
-            <Validator type='temp' currentValue={date} handler={setDate}/>
-            <Validator type='temp' currentValue={time} handler={setTime}/>
-            <Validator type='temp' currentValue={description} handler={setDescription}/>
+            <Validator type='date' currentValue={date} handler={setDate}/>
+            <Validator type='time' currentValue={time} handler={setTime}/>
+            <Validator type='description' currentValue={description} handler={setDescription}/>
 
             <Text style={styles.title}>Client data:</Text>
-            <Validator type='temp' currentValue={name} handler={setName}/>
-            <Validator type='temp' currentValue={lastname} handler={setLastname}/>
-            <Validator type='temp' currentValue={clientid} handler={setClientid}/>
-            <Validator type='temp' currentValue={birthdate} handler={setBirthdate}/>
-            <Validator type='temp' currentValue={city} handler={setCity}/>
-            <Validator type='temp' currentValue={neighborhood} handler={setNeighborhood}/>
-            <Validator type='temp' currentValue={address} handler={setAddress}/>
-            <Validator type='temp' currentValue={phonenumber} handler={setPhonenumber}/>
+            <Validator type='name' currentValue={name} handler={setName}/>
+            <Validator type='lastname' currentValue={lastname} handler={setLastname}/>
+            <Validator type='clientid' currentValue={clientid} handler={setClientid}/>
+            <Validator type='birthdate' currentValue={birthdate} handler={setBirthdate}/>
+            <Validator type='city' currentValue={city} handler={setCity}/>
+            <Validator type='neighborhood' currentValue={neighborhood} handler={setNeighborhood}/>
+            <Validator type='address' currentValue={address} handler={setAddress}/>
+            <Validator type='phonenumber' currentValue={phonenumber} handler={setPhonenumber}/>
 
             <View style={styles.buttons}>
                 <TouchableHighlight style={''} onPress={createData}>
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CreateAppointments;
+export default CreateAppointment;

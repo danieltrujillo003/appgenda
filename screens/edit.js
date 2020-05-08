@@ -19,7 +19,7 @@ function EditAppointments({ route, navigation }) {
     const updateData = async () => {
         let response
         try {
-            response = await fetch(`http://localhost:3000/appointment/${id}`, {
+            response = await fetch(`http://localhost/appgenda-api-slim/api/appointment/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

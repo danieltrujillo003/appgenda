@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableHighlight, Alert } from 'react-native';
 
-function deleteAlert (name) {
+function deleteAlert (navigation, name, id) {
   Alert.alert(
     'Delete Appointment',
     `Are you sure you want to delete the appointment with ${name}?`,
@@ -14,11 +14,11 @@ function deleteAlert (name) {
       { text: "YES",
         onPress: async () => {
           try {
-            await fetch(`http://localhost:3000/appointment/${id}`, { method: 'DELETE' })
+            await fetch(`http://localhost/appgenda-api-slim/api/appointment/delete/${id}`, { method: 'DELETE' })
+            navigation.navigate('Home')
           } catch (error) {
             console.error('Error:', error)
           }
-          navigation.navigate('Home')
         }
       }
     ],
@@ -40,7 +40,7 @@ function CardComponent({ navigation, appointment }){
             <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {appointment, id: _id || id})}>
               <Text>EDIT</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={''} onPress={() => deleteAlert(name)}>
+            <TouchableHighlight style={''} onPress={() => deleteAlert(navigation, name, id)}>
               <Text>DELETE</Text>
             </TouchableHighlight>
           </View>

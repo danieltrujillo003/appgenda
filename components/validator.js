@@ -20,7 +20,7 @@ function Validator(props){
     },
     description: {
       test: /^.{10,60}$/.test(value),
-      message: 'Please input 10 to 60 characters'
+      message: 'Please input description between 10 and 60 characters'
     },
     name: {
       test: /^[A-Z]?[a-z]{3,15}$/.test(value),
@@ -36,7 +36,7 @@ function Validator(props){
     },
     birthdate: {
       test: /^[a-zA-Z]{3,3}\s[0-2][0-9]\s[1,2]\d{3,3}$/.test(value),
-      message: 'Please input date in format: jan 00 2000'
+      message: 'Please input your birthdate in format: jan 00 2000'
     },
     city: {
       test: /^.{3,30}$/.test(value),
@@ -53,10 +53,6 @@ function Validator(props){
     phonenumber: {
       test: /\d{10,10}$/.test(value),
       message: 'Please input your phone number'
-    },
-    temp: {
-      test: /.*/.test(value),
-      message: 'lalala'
     }
   }
 
