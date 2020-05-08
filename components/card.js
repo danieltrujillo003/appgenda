@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native'
 function CardComponent({ navigation, appointment }){
     const {date, description, name, time, id, _id} = appointment
 
-    function deleteAlert () {
+    function deleteAlert (deleteId) {
       Alert.alert(
         'Delete Appointment',
         `Are you sure you want to delete the appointment with ${name}?`,
@@ -17,7 +17,7 @@ function CardComponent({ navigation, appointment }){
             text: "YES",
             onPress: async () => {
               try {
-                await fetch(`https://localhost/appgenda-api-slim/api/appointment/delete/${id}`, { method: 'DELETE' })
+                await fetch(`https://localhost/appgenda-api-slim/api/appointment/delete/${deleteId}`, { method: 'DELETE' })
                 navigation.navigate('Home')
               } catch (error) {
                 console.error('Error:', error)
@@ -35,14 +35,14 @@ function CardComponent({ navigation, appointment }){
           <Text>Name: {name}</Text>
           <Text>Description: {description}</Text>
           <View style={styles.buttons}>
-            <TouchableHighlight style={''} onPress={() => navigation.navigate('Details', { appointment })}>
-              <Text>VIEW MORE</Text>
+            <TouchableHighlight onPress={() => navigation.navigate('Details', { appointment })}>
+              <Text style={styles.button}>VIEW MORE</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', { appointment, id: _id || id })}>
-              <Text>EDIT</Text>
+            <TouchableHighlight onPress={() => navigation.navigate('Edit', { appointment, id: _id || id })}>
+              <Text style={styles.button}>EDIT</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={''} onPress={() => deleteAlert()}>
-              <Text>DELETE</Text>
+            <TouchableHighlight onPress={() => deleteAlert(_id || id)}>
+              <Text style={styles.button}>DELETE</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -50,24 +50,41 @@ function CardComponent({ navigation, appointment }){
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      borderColor: 'black',
-      borderRadius: 10,
-      borderWidth: 1,
-      padding: 10,
-      marginTop: 10
+  container: {
+    flex: 1,
+    borderColor: 'black',
+    borderRadius: 10,
+    borderWidth: 1,
+    padding: 10,
+    marginTop: 10
+  },
+  buttons: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+  button: {
+    backgroundColor: 'teal',
+    color: 'white',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
     },
-    buttons: {
-      marginTop: 10,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    },
-    title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 5
-    }
-  });
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8
+  }
+});
 
 export default CardComponent;

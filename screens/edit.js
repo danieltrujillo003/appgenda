@@ -39,14 +39,14 @@ function EditAppointments({ route, navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-			<ScrollView>
-				<Text style={styles.title}>Personal data:</Text>
+    <ScrollView>
+      <View style={styles.container}>
+				<Text style={styles.title}>Personal data</Text>
 				<Validator type='date' currentValue={date} handler={setDate}/>
 				<Validator type='time' currentValue={time} handler={setTime}/>
 				<Validator type='description' currentValue={description} handler={setDescription}/>
 
-				<Text style={styles.title}>Client data:</Text>
+				<Text style={styles.title}>Client data</Text>
 				<Validator type='name' currentValue={name} handler={setName}/>
 				<Validator type='lastname' currentValue={lastname} handler={setLastname}/>
 				<Validator type='clientid' currentValue={clientid} handler={setClientid}/>
@@ -57,15 +57,15 @@ function EditAppointments({ route, navigation }) {
 				<Validator type='phonenumber' currentValue={phonenumber} handler={setPhonenumber}/>
 
 				<View style={styles.buttons}>
-					<TouchableHighlight style={''} onPress={updateData}>
-						<Text>SAVE</Text>
+					<TouchableHighlight onPress={updateData}>
+						<Text style={styles.button}>SAVE</Text>
 					</TouchableHighlight>
-					<TouchableHighlight style={''} onPress={() => navigation.navigate('List')}>
-						<Text>CANCEL</Text>
+					<TouchableHighlight onPress={() => navigation.navigate('List')}>
+						<Text style={styles.button}>CANCEL</Text>
 					</TouchableHighlight>
 				</View>
-			</ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -73,9 +73,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: 30
+    marginTop: 20
   },
   item: {
     backgroundColor: '#f9c2ff',
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   buttons: {
-    marginTop: 10,
+    width: '90%',
+    margin: 10,
     flexDirection: 'row',
     justifyContent: 'space-between'
     },
@@ -97,7 +99,25 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+		marginTop: 10
   },
+  button: {
+    backgroundColor: 'teal',
+    color: 'white',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8
+  }
 });
 
 export default EditAppointments;

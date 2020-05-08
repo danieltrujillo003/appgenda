@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, TextInput } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 function Validator(props){
   const { type, currentValue, handler } = props
@@ -59,7 +59,7 @@ function Validator(props){
   const [isRight, setIsRight] = useState(inputType[type].test);
 
   return (
-    <>
+    <View style={styles.root}>
       <TextInput
         style={[styles.container,isRight ? styles.rightInput : styles.wrongInput]}
         onChangeText={text => {handler(text),onChangeText(text)}}
@@ -68,26 +68,31 @@ function Validator(props){
       {
         !isRight && <Text style={styles.wrongText}>{inputType[type].message}</Text>
       }
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      width:'80%',
-      height: 40,
-      borderWidth: 1
-    },
-    rightInput: {
-      borderColor:'green'
-    },
-    wrongInput: {
-      borderColor:'red'
-    },
-    wrongText: {
-      color: 'red',
-      fontSize: 10
-    }
-  });
+  root: {
+    width:'90%',
+  },
+  container: {
+    height: 40,
+    borderWidth: 2,
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 10
+  },
+  rightInput: {
+    borderColor: 'teal'
+  },
+  wrongInput: {
+    borderColor:'red'
+  },
+  wrongText: {
+    color: 'red',
+    fontSize: 10
+  }
+});
 
 export default Validator;
