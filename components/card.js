@@ -1,46 +1,47 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableHighlight, Alert } from 'react-native';
-
-function deleteAlert (navigation, name, id) {
-  Alert.alert(
-    'Delete Appointment',
-    `Are you sure you want to delete the appointment with ${name}?`,
-    [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "YES",
-        onPress: async () => {
-          try {
-            await fetch(`http://localhost/appgenda-api-slim/api/appointment/delete/${id}`, { method: 'DELETE' })
-            navigation.navigate('Home')
-          } catch (error) {
-            console.error('Error:', error)
-          }
-        }
-      }
-    ],
-    { cancelable: false }
-  )
-}
+import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native';
 
 function CardComponent({ navigation, appointment }){
     const {date, description, name, time, id, _id} = appointment
+
+    function deleteAlert () {
+      Alert.alert(
+        'Delete Appointment',
+        `Are you sure you want to delete the appointment with ${name}?`,
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          {
+            text: "YES",
+            onPress: async () => {
+              try {
+                await fetch(`https://localhost/appgenda-api-slim/api/appointment/delete/${id}`, { method: 'DELETE' })
+                navigation.navigate('Home')
+              } catch (error) {
+                console.error('Error:', error)
+              }
+            }
+          }
+        ],
+        { cancelable: false }
+      )
+    }
+
     return(
         <View style={styles.container}>
           <Text style={styles.title}>{date} at {time}</Text>
           <Text>Name: {name}</Text>
           <Text>Description: {description}</Text>
           <View style={styles.buttons}>
-            <TouchableHighlight style={''} onPress={() => navigation.navigate('Details', {appointment})}>
+            <TouchableHighlight style={''} onPress={() => navigation.navigate('Details', { appointment })}>
               <Text>VIEW MORE</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', {appointment, id: _id || id})}>
+            <TouchableHighlight style={''} onPress={() => navigation.navigate('Edit', { appointment, id: _id || id })}>
               <Text>EDIT</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={''} onPress={() => deleteAlert(navigation, name, id)}>
+            <TouchableHighlight style={''} onPress={() => deleteAlert()}>
               <Text>DELETE</Text>
             </TouchableHighlight>
           </View>

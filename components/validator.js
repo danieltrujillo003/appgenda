@@ -60,14 +60,14 @@ function Validator(props){
 
   return (
     <>
-    <TextInput
-      style={[styles.container,isRight ? styles.rightInput : styles.wrongInput]}
-      onChangeText={text => {handler(text),onChangeText(text)}}
-      value={value}
-    />
-    {
-      !isRight && <Text style={styles.wrongText}>{inputType[type].message}</Text>
-    }
+      <TextInput
+        style={[styles.container,isRight ? styles.rightInput : styles.wrongInput]}
+        onChangeText={text => {handler(text),onChangeText(text)}}
+        value={value}
+      />
+      {
+        !isRight && <Text style={styles.wrongText}>{inputType[type].message}</Text>
+      }
     </>
   );
 }

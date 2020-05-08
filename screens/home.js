@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableHighlight
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 
 export default function App({ navigation }) {
   return (

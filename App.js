@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/home'
 import List from './screens/list'
-import Edit from './screens/edit'
-import Details from'./screens/details'
 import Create from'./screens/create'
+import Details from'./screens/details'
+import Edit from './screens/edit'
 
 
 const Stack = createStackNavigator();
